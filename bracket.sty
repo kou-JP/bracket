@@ -1,0 +1,84 @@
+\RequirePackage{expl3}
+\RequirePackage{xparse}
+\RequirePackage{amsmath}
+\RequirePackage{mleftright}
+
+\ProvidesExplPackage {bracket} {2022-09-28} {1.0} {brackets and Dirac bra-ket notation package}
+
+\ProvideDocumentCommand\ordersymbol{}{\mathcal{O}}
+\ProvideDocumentCommand\lparen{}{(} 
+\ProvideDocumentCommand\rparen{}{)} 
+\sys_if_engine_luatex:TF {\newcommand{\relmiddle}{\Umiddle class 3 }}{\newcommand{\relmiddle}[1]{\mathrel{}\middle#1\mathrel{}}}
+\tl_new:N \l__mymacro_bigl_tl
+\tl_new:N \l__mymacro_bigr_tl
+\tl_new:N \l__mymacro_bigm_tl
+
+%brackets
+\NewDocumentCommand\lrparen{ s o m }{\IfBooleanTF{#1}{\lparen#3\rparen}{\IfValueTF{#2}{
+	\tl_set:Nn \l__mymacro_bigl_tl {#2 l}
+	\tl_set:Nn \l__mymacro_bigr_tl {#2 r}
+	\cs:w \tl_use:N \l__mymacro_bigl_tl \cs_end:\lparen#3\cs:w \tl_use:N \l__mymacro_bigr_tl \cs_end:\rparen}{\mleft\lparen#3\mright\rparen}}}
+\NewDocumentCommand\lrbrack{ s o m }{\IfBooleanTF{#1}{\lbrack#3\rbrack}{\IfValueTF{#2}{
+	\tl_set:Nn \l__mymacro_bigl_tl {#2 l}
+	\tl_set:Nn \l__mymacro_bigr_tl {#2 r}
+	\cs:w \tl_use:N \l__mymacro_bigl_tl \cs_end:\lbrack#3\cs:w \tl_use:N \l__mymacro_bigr_tl \cs_end:\rbrack}{\mleft\lbrack#3\mright\rbrack}}}
+\NewDocumentCommand\lrangle{ s o m }{\IfBooleanTF{#1}{\langle#3\rangle}{\IfValueTF{#2}{
+	\tl_set:Nn \l__mymacro_bigl_tl {#2 l}
+	\tl_set:Nn \l__mymacro_bigr_tl {#2 r}
+	\cs:w \tl_use:N \l__mymacro_bigl_tl \cs_end:\langle#3\cs:w \tl_use:N \l__mymacro_bigr_tl \cs_end:\rangle}{\mleft\langle#3\mright\rangle}}}
+\NewDocumentCommand\lrbrace{ s o m }{\IfBooleanTF{#1}{\lbrace#3\rbrace}{\IfValueTF{#2}{
+	\tl_set:Nn \l__mymacro_bigl_tl {#2 l}
+	\tl_set:Nn \l__mymacro_bigr_tl {#2 r}
+	\cs:w \tl_use:N \l__mymacro_bigl_tl \cs_end:\lbrace#3\cs:w \tl_use:N \l__mymacro_bigr_tl \cs_end:\rbrace}{\mleft\lbrace#3\mright\rbrace}}}
+\NewDocumentCommand\lrvert{ s o m }{\IfBooleanTF{#1}{\lvert#3\rvert}{\IfValueTF{#2}{
+	\tl_set:Nn \l__mymacro_bigl_tl {#2 l}
+	\tl_set:Nn \l__mymacro_bigr_tl {#2 r}
+	\cs:w \tl_use:N \l__mymacro_bigl_tl \cs_end:\lvert#3\cs:w \tl_use:N \l__mymacro_bigr_tl \cs_end:\rvert}{\mleft\lvert#3\mright\rvert}}}
+\NewDocumentCommand\lrVert{ s o m }{\IfBooleanTF{#1}{\lVert#3\rVert}{\IfValueTF{#2}{
+	\tl_set:Nn \l__mymacro_bigl_tl {#2 l}
+	\tl_set:Nn \l__mymacro_bigr_tl {#2 r}
+	\cs:w \tl_use:N \l__mymacro_bigl_tl \cs_end:\lVert#3\cs:w \tl_use:N \l__mymacro_bigr_tl \cs_end:\rVert}{\mleft\lVert#3\mright\rVert}}}
+\newcommand{\expval}{\lrangle}
+\newcommand{\abs}{\lrvert}
+\newcommand{\norm}{\lrVert}
+\NewDocumentCommand\order{ s o m }{\IfBooleanTF{#1}{\ordersymbol\lparen#3\rparen}{\IfValueTF{#2}{
+	\tl_set:Nn \l__mymacro_bigl_tl {#2 l}
+	\tl_set:Nn \l__mymacro_bigr_tl {#2 r}
+	\ordersymbol\cs:w \tl_use:N \l__mymacro_bigl_tl \cs_end:\lparen#3\cs:w \tl_use:N \l__mymacro_bigr_tl \cs_end:\rparen}{\ordersymbol\mleft\lparen#3\mright\rparen}}}
+
+%Dirac bra-ket notation
+\NewDocumentCommand\bra{ s o m }{\IfBooleanTF{#1}{\langle#3\rvert}{\IfValueTF{#2}{
+	\tl_set:Nn \l__mymacro_bigl_tl {#2 l}
+	\tl_set:Nn \l__mymacro_bigr_tl {#2 r}
+	\cs:w \tl_use:N \l__mymacro_bigl_tl \cs_end:\langle#3\cs:w \tl_use:N \l__mymacro_bigr_tl \cs_end:\rvert
+	}{\mleft\langle#3\mright\rvert}}}
+\NewDocumentCommand\ket{ s o m }{\IfBooleanTF{#1}{\lvert#3\rangle}{\IfValueTF{#2}{
+	\tl_set:Nn \l__mymacro_bigl_tl {#2 l}
+	\tl_set:Nn \l__mymacro_bigr_tl {#2 r}
+	\cs:w \tl_use:N \l__mymacro_bigl_tl \cs_end:\lvert#3\cs:w \tl_use:N \l__mymacro_bigr_tl \cs_end:\rangle
+	}{\mleft\rvert#3\mright\rangle}}}
+\NewDocumentCommand\ketbra{ s o m m }{\IfBooleanTF{#1}{\ket*{#3}\bra*{#4}}{\IfValueTF{#2}{
+	\tl_set:Nn \l__mymacro_bigl_tl {#2 l}
+	\tl_set:Nn \l__mymacro_bigr_tl {#2 r}
+	\cs:w \tl_use:N \l__mymacro_bigl_tl \cs_end:\lvert#3\cs:w \tl_use:N \l__mymacro_bigr_tl \cs_end:\rangle
+	\cs:w \tl_use:N \l__mymacro_bigl_tl \cs_end:\langle#4\cs:w \tl_use:N \l__mymacro_bigr_tl \cs_end:\rvert
+	}{\mleft\lvert#3\vphantom{#4}\mright\rangle\mleft\langle#4\vphantom{#3}\mright\rvert}}}
+\NewDocumentCommand\braket{ s o m o m }{\IfBooleanTF{#1}{\IfValueTF{#4}{\bra*{#3}#4\ket*{#5}}{\langle#3\mathord{|}#5\rangle}}{\IfValueTF{#4}{\IfValueTF{#2}{
+	\tl_set:Nn \l__mymacro_bigl_tl {#2 l}
+	\tl_set:Nn \l__mymacro_bigr_tl {#2 r}
+	\cs:w \tl_use:N \l__mymacro_bigl_tl \cs_end:\langle#3\cs:w \tl_use:N \l__mymacro_bigr_tl \cs_end:\rvert#4
+	\cs:w \tl_use:N \l__mymacro_bigl_tl \cs_end:\lvert#5\cs:w \tl_use:N \l__mymacro_bigr_tl \cs_end:\rangle
+}{\mleft\langle#3\vphantom{#4#5}\mright\rvert#4\mleft\lvert#5\vphantom{#3#4}\mright\rangle}}{\IfValueTF{#2}{
+	\tl_set:Nn \l__mymacro_bigl_tl {#2 l}
+	\tl_set:Nn \l__mymacro_bigr_tl {#2 r}
+	\tl_set:Nn \l__mymacro_bigm_tl {#2 m}
+	\cs:w \tl_use:N \l__mymacro_bigl_tl \cs_end:\langle#3\mathord{\cs:w \tl_use:N \l__mymacro_bigm_tl \cs_end:|}#5\cs:w \tl_use:N \l__mymacro_bigr_tl \cs_end:\rangle
+	}{\mleft\langle#3\middle|#5\mright\rangle}}}}
+
+%set
+\NewDocumentCommand\set{ s o m m }{\IfBooleanTF{#1}{\lbrace#3\mid#4\rbrace}{\IfValueTF{#2}{
+	\tl_set:Nn \l__mymacro_bigl_tl {#2 l}
+	\tl_set:Nn \l__mymacro_bigr_tl {#2 r}
+	\tl_set:Nn \l__mymacro_bigm_tl {#2 m}
+	\cs:w \tl_use:N \l__mymacro_bigl_tl \cs_end:\lbrace#3\cs:w \tl_use:N \l__mymacro_bigm_tl \cs_end:|#4\cs:w \tl_use:N \l__mymacro_bigr_tl \cs_end:\rbrace
+}{\mleft\lbrace#3\relmiddle|#4\mright\rbrace}}}
