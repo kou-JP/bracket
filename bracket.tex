@@ -1,0 +1,42 @@
+\documentclass{article}
+\usepackage{bracket}
+\usepackage{amssymb}
+\title{The \textsf{bracket} package}
+\author{kou-JP}
+\date{\today}
+\begin{document}
+\maketitle
+\section{brackets}
+\subsection{automatically sizable brackets}
+\begin{align*}
+     & \text{\textbackslash lrparen\{a\}} & \lrparen{a} \\
+     & \text{\textbackslash lrbrack\{a\}} & \lrbrack{a} \\
+     & \text{\textbackslash lrbrace\{a\}} & \lrbrace{a} \\
+     & \text{\textbackslash lrangle\{a\}} & \lrangle{a} \\
+     & \text{\textbackslash expval\{a\}}  & \expval{a}  \\
+     & \text{\textbackslash lrvert\{a\}}  & \lrvert{a}  \\
+     & \text{\textbackslash abs\{a\}}     & \abs{a}     \\
+     & \text{\textbackslash lrVert\{a\}}  & \lrVert{a}  \\
+     & \text{\textbackslash norm\{a\}}    & \norm{a}
+\end{align*}
+\subsection{manually sizable brackets}
+\begin{align*}
+     & \text{\textbackslash lrparen*\{a\}}      & \lrparen*{a}      \\
+     & \text{\textbackslash lrparen[big]\{a\}}  & \lrparen[big]{a}  \\
+     & \text{\textbackslash lrparen[Big]\{a\}}  & \lrparen[Big]{a}  \\
+     & \text{\textbackslash lrparen[bigg]\{a\}} & \lrparen[bigg]{a} \\
+     & \text{\textbackslash lrparen[Bigg]\{a\}} & \lrparen[Bigg]{a}
+\end{align*}
+\section{Dirac bra-ket notation}
+\begin{align*}
+     & \text{\textbackslash bra\{\textbackslash frac\{1\}\{2\}\}}                                                         & \bra{\frac{1}{2}}                         \\
+     & \text{\textbackslash ket*\{a\}}                                                                                    & \ket*{a}                                  \\
+     & \text{\textbackslash ketbra\{\textbackslash frac\{1\}\{2\}\}\{\textbackslash psi\}}                                & \ketbra{\frac{1}{2}}{\psi}                \\
+     & \text{\textbackslash braket\{\textbackslash phi\}\{\textbackslash psi\}}                                           & \braket{\phi}{\psi}                       \\
+     & \text{\textbackslash braket[bigg]\{\textbackslash frac\{1\}\{2\}\}[\textbackslash hat\{O\}]\{\textbackslash psi\}} & \braket[bigg]{\frac{1}{2}}[\hat{O}]{\psi}
+\end{align*}
+\section{set}
+\begin{align*}
+     & \text{\textbackslash set\{x\textbackslash in\textbackslash mathbb\{C\}\}\{0<\textbackslash abs\{x\}<3\}} & \set{x\in\mathbb{C}}{0<\abs{x}<3}
+\end{align*}
+\end{document}
