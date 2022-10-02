@@ -108,6 +108,19 @@
 		}
 	}
 }
+\NewDocumentCommand\bracket{ s o m m m }{
+	\IfBooleanTF{#1}{
+		#3#4#5
+	}{
+		\IfValueTF{#2}{
+			\tl_set:Nn \l__mymacro_bigl_tl {#2 l}
+			\tl_set:Nn \l__mymacro_bigr_tl {#2 r}
+			\cs:w \tl_use:N \l__mymacro_bigl_tl \cs_end:#3#4\cs:w \tl_use:N \l__mymacro_bigr_tl \cs_end:#5
+		}{
+			\mleft#3#4\mright#5
+		}
+	}
+}
 
 %Dirac bra-ket notation
 \NewDocumentCommand\bra{ s o m }{
